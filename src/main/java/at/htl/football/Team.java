@@ -9,12 +9,52 @@ public class Team {
     private int defeats;
     private int goalsShot;
     private int goalsReceived;
+    private int goalDifference;
 
     public Team(String name) {
         this.name = name;
     }
 
-    public void addMatch(Match) {
+    public void addMatch(Match match) {
+
+        if (match.getHomeName().equals(name)) {
+
+            if (match.getHomeGoals() < match.getGuestGoals()) {
+
+                defeats++;
+
+            } else if (match.getHomeGoals() > match.getGuestGoals()) {
+
+                wins++;
+
+            } else {
+
+                draws++;
+
+            }
+
+            goalsShot += match.getHomeGoals();
+            goalsReceived += match.getGuestGoals();
+
+        } else if (match.getGuestName().equals(name)) {
+
+            if (match.getHomeGoals() < match.getGuestGoals()) {
+
+                wins++;
+
+            } else if (match.getHomeGoals() > match.getGuestGoals()) {
+
+                defeats++;
+
+            } else {
+
+                draws++;
+
+            }
+
+            goalsShot += match.getGuestGoals();
+            goalsReceived += match.getHomeGoals();
+        }
 
     }
 

@@ -8,10 +8,12 @@ public class Match {
     private int guestGoals;
 
     public Match(String homeName, String guestName, int homeGoals, int guestGoals) {
+
         this.homeName = homeName;
         this.guestName = guestName;
         this.homeGoals = homeGoals;
         this.guestGoals = guestGoals;
+
     }
 
     public String getHomeName() {
@@ -31,10 +33,22 @@ public class Match {
     }
 
     public int getHomePoints() {
-
+        if (homeGoals > guestGoals) {
+            return 3;
+        } else if (homeGoals == guestGoals) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
     public int getGuestPoints() {
-
+        if (guestGoals > homeGoals) {
+            return 3;
+        } else if (guestGoals == homeGoals) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }
