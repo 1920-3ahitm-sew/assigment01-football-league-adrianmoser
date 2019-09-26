@@ -1,6 +1,7 @@
 package at.htl.football;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class League {
@@ -9,39 +10,39 @@ public class League {
 
     public void addMatchResult(Match match) {
 
-        Team team = new Team(match.getHomeName());
+        Team team = findOrCreateTeam(match.getHomeName());
+        Team guestTeam = findOrCreateTeam(match.getGuestName());
+
         team.addMatch(match);
+        guestTeam.addMatch(match);
 
     }
 
     private Team findOrCreateTeam(String name) {
 
-        if (teams.size() == 0) {
+        for (Team team : teams) {
 
-            teams.add(new Team(name));
+            if (team.getName().equals(name)) {
 
-        } else {
+                return team;
 
-            for (int i = 0; i < teams.size(); i++) {
-
-                if (teams.get(i).getName().equals(name)) {
-
-                    return teams.get(i);
-
-                }
             }
-
-            teams.add(new Team(name));
-
-            return new Team(name);
 
         }
 
-        return null;
+        Team oTeam = new Team(name);
+
+        teams.add(oTeam);
+
+        return oTeam;
 
     }
 
     public List<Team> getTable() {
+
+        Collections.sort(teams);
+
+        return teams;
 
     }
 }

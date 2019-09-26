@@ -23,14 +23,12 @@ public class Main {
 
         try {
 
-            List<String> list = new ArrayList<>();
-            list = Files.readAllLines(file);
+            List<String> list = Files.readAllLines(file);
 
-            for (int i = 0; i < list.size(); i++) {
+            for (int i = 1; i < list.size(); i++) {
 
                 String line = list.get(i);
                 String[] parts = line.split(";");
-                date = parts[0];
                 homeTeam = parts[1];
                 guestTeam = parts[2];
                 homeGoals = Integer.parseInt(parts[3]);
@@ -47,12 +45,34 @@ public class Main {
 
         }
 
-
+        printTable(league.getTable());
 
     }
 
-    private void printTable(List<Team> teamList) {
+    private static void printTable(List<Team> teamList) {
 
+        System.out.printf("Team                Pts  W   D   L  GF  GA  GD");
+        System.out.println();
+
+        for (Team team : teamList) {
+
+            System.out.print(team.getName());
+
+            for (int i = 0; i < 20 - team.getName().length(); i++) {
+
+                System.out.print(" ");
+
+            }
+
+            System.out.printf("%2d  %2d  %2d  %2d  %2d  %2d  %2d", team.getPoints(), team.getWins(), team.getDraws(), team.getDefeats(), team.getGoalsShot(), team.getGoalsReceived(), team.getGoalDifference());
+            System.out.println();
+
+        }
+
+        System.out.println();
+        System.out.print("Pts...Points, W...Won, D...Drawn, L...Lost");
+        System.out.println();
+        System.out.print("GF...Goals for, GA...Goals against, GD...Goal difference");
 
     }
 
